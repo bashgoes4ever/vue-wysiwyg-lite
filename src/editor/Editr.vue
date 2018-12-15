@@ -74,7 +74,8 @@ export default {
 
     data () {
         return {
-            selection: ""
+            selection: "",
+            selectedNode: null
         }
     },
 

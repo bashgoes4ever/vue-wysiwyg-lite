@@ -6,7 +6,7 @@
 <script>
 export default {
   name: 'app',
-  data () {
+  data() {
     return {
       msg: `<p>Welcome to <b>vue-wysiwyg</b>!</p>
       <p>
@@ -49,14 +49,17 @@ export default {
     }
   }
 }
+
 </script>
+
 
 <style>
 * {
-  margin:0;
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 .wrapper {
   max-width: 800px;
   margin: 10em auto;
@@ -72,13 +75,15 @@ export default {
 
 body {
   font-family: -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                Roboto,
-                Oxygen-Sans,
-                Ubuntu,
-                Cantarell,
-                "Helvetica Neue",
-                sans-serif;
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen-Sans,
+    Ubuntu,
+    Cantarell,
+    "Helvetica Neue",
+    sans-serif;
 }
+
 </style>
+

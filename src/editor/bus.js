@@ -9,7 +9,9 @@ function Emitter() {
     emit: (eventName, ...args) => {
       if (self.listeners[eventName] !== undefined)
         self.listeners[eventName].forEach(handler => handler.apply(args));
-    }
+    },
+    selectedNode: null,
+    selectedText: null
   }
 
   return self;

@@ -21,51 +21,62 @@ div(@mousedown="onBtnClick")
 import bus from 'src/editor/bus.js';
 
 export default {
-	props: ["module", "options"],
+  props: ["module", "options"],
 
-	data () {
-		return {
-			showDashboard: false,
-		}
-	},
+  data() {
+    return {
+      showDashboard: false,
+    }
+  },
 
   computed: {
-    uid () {
+    uid() {
       return this.$parent._uid
     }
   },
 
-	methods: {
-		closeDashboard () {
-			this.showDashboard = false;
-		},
+  methods: {
+    closeDashboard() {
+      this.showDashboard = false;
+    },
 
-		openDashboard () {
-			this.showDashboard = true;
-		},
+    openDashboard() {
+      this.showDashboard = true;
+    },
 
-    exec () {
+    exec() {
+      console.log(arguments);
       this.$parent.exec.apply(null, arguments)
     },
 
-		onBtnClick ($event) {
-			$event.preventDefault();
-			if (this.module.action !== undefined)
-				this.exec.apply(null, this.module.action);
+    onBtnClick($event) {
+      this.selection = window.getSelection();
 
-			else if (this.module.customAction !== undefined) {
-				this.module.customAction(bus.utils).forEach(a => this.exec.apply(null, a));
-			}
+      if (document.activeElement.classList.contains('editr--content')) {
+        bus.selectedNode = this.selection.getRangeAt(0).commonAncestorContainer.parentElement;
+        bus.selectedText = this.selection.getRangeAt(0).toString();
+        if (!$event.target.nodeName == 'INPUT') {
+          $event.preventDefault();
+        }
+      }
 
-			else if (
-				this.module.render !== undefined &&
-				(!this.$refs.dashboard || !this.$refs.dashboard.contains($event.target))
-			) {
-				this.showDashboard = !this.showDashboard;
-				bus.emit(`${this.uid}_${this.showDashboard ? "show" : "hide"}_dashboard_${this.module.title}`);
-				return;
-			}
-		}
-	}
+      if (this.module.action !== undefined)
+        this.exec.apply(null, this.module.action);
+
+      else if (this.module.customAction !== undefined) {
+        this.module.customAction(bus.utils).forEach(a => this.exec.apply(null, a));
+      } else if (
+        this.module.render !== undefined &&
+        (!this.$refs.dashboard || !this.$refs.dashboard.contains($event.target))
+      ) {
+        this.showDashboard = !this.showDashboard;
+        bus.emit(`${this.uid}_${this.showDashboard ? "show" : "hide"}_dashboard_${this.module.title}`);
+        return;
+      }
+    }
+  }
 }
+
 </script>
+
+
