@@ -1,7 +1,7 @@
 {
-  "name": "vue-wysiwyg-improved",
-  "version": "1.7.4",
-  "description": "A WYSIWYG HTML editor for Vue.js",
+  "name": "vue-wysiwyg-lite",
+  "version": "1.0.0",
+  "description": "A Lightweight WYSIWYG HTML editor for Vue.js for modern browser",
   "keywords": [
     "vue",
     "vue2",
@@ -9,7 +9,7 @@
     "html",
     "editor"
   ],
-  "author": "Gregory <gregory.mkv@gmail.com>",
+  "author": "Ritesh <itsyub@gmail.com>",
   "license": "MIT",
   "main": "dist/vueWysiwyg.js",
   "style": "dist/vueWysiwyg.css",
@@ -68,10 +68,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Ramya-Palaniswami/vue-wysiwyg.git"
+    "url": "git+https://github.com/itsyub/vue-wysiwyg-lite.git"
   },
   "bugs": {
-    "url": "https://github.com/Ramya-Palaniswami/vue-wysiwyg/issues"
+    "url": "https://github.com/itsyub/vue-wysiwyg-lite/issues"
   },
-  "homepage": "https://github.com/Ramya-Palaniswami/vue-wysiwyg#readme"
+  "homepage": "https://github.com/itsyub/vue-wysiwyg-lite#readme"
 }

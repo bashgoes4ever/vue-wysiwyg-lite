@@ -2,11 +2,11 @@
   <form @submit.prevent="insertLink">
     <label>
       <span>URL</span>
-      <input ref="url" type="text" style="width: 100%" v-model="url">
+      <input ref="url" type="url" required="" style="width: 100%" v-model="url">
     </label>
     <label>
       <span>Link Title</span>
-      <input type="text" style="width: 100%" v-model="title">
+      <input type="text" required="" style="width: 100%" v-model="title">
     </label>
     <button type="submit">Insert</button>
   </form>
@@ -32,7 +32,6 @@ export default {
   },
   methods: {
     insertLink() {
-      console.log(this.selectedAnchor);
       if (this.selectedAnchor && this.selectedAnchor.nodeName === 'A') {
         console.log('anchor tab');
         this.selectedAnchor.href = this.url;
@@ -65,8 +64,7 @@ export default {
 };
 
 </script>
-
-<style lang="css">
+<style lang="css" scoped>
 label {
   width: 100%;
   display: block;
@@ -80,9 +78,10 @@ label span {
 }
 
 label input {
-  padding: 5px;
+  padding: 5px 5px 5px 10px;
   border-radius: 2em;
   border: 1px solid #e4e4e4;
+  height: auto !important;
 }
 
 button {
@@ -91,7 +90,7 @@ button {
   padding: 5px 10px;
   border: 1px solid #ffffff;
   border-radius: 2em;
-  margin: 10px 5px;
+  margin-top: 10px;
   color: #fff;
   font-size: 1em;
   font-weight: 100;

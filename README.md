@@ -1,20 +1,19 @@
-Forked from [vue-wysiwyg](https://github.com/chmln/vue-wysiwyg)
-
 [![](https://user-images.githubusercontent.com/11352152/30252159-1bbb9cfe-963b-11e7-966c-b44116c74a86.png)](https://chmln.github.io/vue-wysiwyg/)
 
 
 ## Usage
-Works in IE11
+
+Works in all mordern browsers 
 
 ### Install vue-wysiwyg
 
 ``` bash
-npm install vue-wysiwyg --save
+npm install vue-wysiwyg-lite --save
 ```
 OR
 
 ``` bash
-yarn add vue-wysiwyg
+yarn add vue-wysiwyg-lite
 ```
 
 In your `main.js`:
@@ -59,7 +58,10 @@ All keys are optional.
   maxHeight: "500px",
 
   // set to 'true' this will insert plain text without styling when you paste something into the editor.
-  forcePlainTextOnPaste: true
+  forcePlainTextOnPaste: true,
+
+  // set default paragraph seperator
+  paragraphSeperator: 'div',
 }
 ```
 Available Modules:
