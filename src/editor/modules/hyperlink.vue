@@ -70,6 +70,7 @@ label {
   display: block;
   float: left;
   padding: 5px;
+  box-sizing: border-box;
 }
 
 label span {

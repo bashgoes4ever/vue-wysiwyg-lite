@@ -1,6 +1,6 @@
 <template lang="pug">
 .editr
-    .editr--toolbar
+    .editr--toolbar(:class="mergedOptions.toolbarPosition")
         Btn(
             v-for="(module,i) in modules",
             :module="module",
@@ -256,6 +256,12 @@ $svgSize = 16px
 .editr
     border 1px solid darken($offwhite, 7.5%)
     width 100%
+    position relative
+
+    .editr--toolbar
+        &.bottom
+            ~.editr--content
+                padding-bottom 50px
 
 .editr--toolbar
     background $offwhite
@@ -264,6 +270,10 @@ $svgSize = 16px
     display flex
     height $buttonHeight
 
+    &.bottom
+        position absolute
+        width 100%
+        bottom 0
     a
         display inline-block
         width $buttonWidth
@@ -315,6 +325,11 @@ $svgSize = 16px
         box-sizing border-box
         z-index 16
 
+    &.bottom
+
+        .dashboard
+            top unset
+            bottom 100%
 
 
 .editr--content

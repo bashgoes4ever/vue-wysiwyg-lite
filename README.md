@@ -3,7 +3,7 @@
 
 ## Usage
 
-Works in all mordern browsers 
+Works in all modern browsers 
 
 ### Install vue-wysiwyg
 
@@ -19,7 +19,7 @@ yarn add vue-wysiwyg-lite
 In your `main.js`:
 
 ```js
-import wysiwyg from "vue-wysiwyg";
+import wysiwyg from "vue-wysiwyg-lite";
 Vue.use(wysiwyg, {}); // config is optional. more below
 ```
 
@@ -27,7 +27,7 @@ Also make sure to load the stylesheet.
 The exact syntax will depend on what preprocessor you use.
 
 ```css
-@import "~vue-wysiwyg/dist/vueWysiwyg.css";
+@import "vue-wysiwyg-lite/dist/vueWysiwyg.css";
 ```
 
 In your components:
@@ -62,6 +62,10 @@ All keys are optional.
 
   // set default paragraph seperator
   paragraphSeperator: 'div',
+
+  //set toolbar position to bottom
+  toolbarPosition: 'bottom'
+
 }
 ```
 Available Modules:

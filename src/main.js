@@ -5,7 +5,8 @@ import wysiwyg from "./editor";
 Vue.use(wysiwyg, {
   hideModules: {
     bold: false
-  }
+  },
+  toolbarPosition: 'bottom'
 });
 
 new Vue({
