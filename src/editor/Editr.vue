@@ -251,7 +251,7 @@ export default {
 $offwhite = #f6f6f6
 $buttonWidth = 42px
 $buttonHeight = 42px
-$svgSize = 20px
+$svgSize = 16px
 
 .editr
     border 1px solid darken($offwhite, 7.5%)
@@ -269,7 +269,6 @@ $svgSize = 20px
     position relative
     display flex
     height $buttonHeight
-    overflow auto
 
     &.bottom
         position absolute
