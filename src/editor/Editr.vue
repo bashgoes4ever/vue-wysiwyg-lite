@@ -249,9 +249,9 @@ export default {
 
 <style lang="stylus">
 $offwhite = #f6f6f6
-$buttonWidth = 8vw
-$buttonHeight = 32px
-$svgSize = 16px
+$buttonWidth = 42px
+$buttonHeight = 42px
+$svgSize = 20px
 
 .editr
     border 1px solid darken($offwhite, 7.5%)
@@ -269,15 +269,18 @@ $svgSize = 16px
     position relative
     display flex
     height $buttonHeight
+    overflow auto
 
     &.bottom
         position absolute
         width 100%
         bottom 0
+        border-bottom 0
+        border-top 1px solid #e4e4e4
     a
         display inline-block
         width $buttonWidth
-        max-width 32px
+        max-width $buttonHeight
         height $buttonHeight
         color #333
         fill #333
