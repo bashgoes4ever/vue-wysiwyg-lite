@@ -36,7 +36,7 @@ export default {
         console.log('anchor tab');
         this.selectedAnchor.href = this.url;
         this.selectedAnchor.innerText = this.title;
-        //this.$emit('exec',"insertHTML", this.selectedAnchor.toString())
+        this.$emit('exec',"insertHTML", this.selectedAnchor.toString())
       } else {
         this.$emit("exec", "insertHTML", `<a href='${this.url}'>${this.title}</a>`);
       }
