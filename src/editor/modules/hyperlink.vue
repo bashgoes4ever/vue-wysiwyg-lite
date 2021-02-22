@@ -33,10 +33,10 @@ export default {
   methods: {
     insertLink() {
       if (this.selectedAnchor && this.selectedAnchor.nodeName === 'A') {
-        console.log('anchor tab');
+        console.log(this.title)
+        console.log(this.url)
         this.selectedAnchor.href = this.url;
         this.selectedAnchor.innerText = this.title;
-        console.log(this.url, this.title)
         this.$emit('exec',"insertHTML", `<a href='${this.url}'>${this.title}</a>`)
       } else {
         this.$emit("exec", "insertHTML", `<a href='${this.url}'>${this.title}</a>`);
