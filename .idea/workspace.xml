@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="465b6018-50f2-4df7-817e-81b22e5316be" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/editor/modules/hyperlink.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/editor/modules/hyperlink.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,7 +35,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1613992707449</updated>
-      <workItem from="1613992708619" duration="1753000" />
+      <workItem from="1613992708619" duration="2435000" />
     </task>
     <servers />
   </component>
