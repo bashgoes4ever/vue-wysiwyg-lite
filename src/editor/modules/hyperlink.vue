@@ -48,6 +48,7 @@ export default {
 
   created() {
     bus.on(this.uid + "_show_dashboard_link", () => {
+      console.log('bus:', bus)
       this.$nextTick(() => {
         if (bus.selectedNode !== null && bus.selectedNode.nodeName === 'A') {
           this.selectedAnchor = bus.selectedNode;

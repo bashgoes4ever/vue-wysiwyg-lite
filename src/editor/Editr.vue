@@ -1,17 +1,19 @@
 <template lang="pug">
-.editr
+  .editr
     .editr--toolbar(:class="mergedOptions.toolbarPosition")
-        Btn(
-            v-for="(module,i) in modules",
-            :module="module",
-            :options="mergedOptions",
-            :key="module.title + i",
+      Btn(
+        v-for="(module,i) in modules",
+        :module="module",
+        :options="mergedOptions",
+        :key="module.title + i",
+        :selectionOptions="selectionOptions",
+        @updateOptions="updateSelectionOptions",
 
-            :ref="'btn-'+module.title",
-            :title="module.description || ''"
-        )
+        :ref="'btn-'+module.title",
+        :title="module.description || ''"
+      )
 
-    .editr--content(ref="content", contenteditable="true", tabindex="1", :placeholder="placeholder")
+    .editr--content(ref="content", contenteditable="true", tabindex="1", :placeholder="placeholder", @mouseup="getSelectionOptions")
 
 </template>
 <script>
@@ -31,7 +33,7 @@ import alignRight from "./modules/alignRight.js"
 import headings from "./modules/headings.vue";
 import hyperlink from "./modules/hyperlink.vue";
 import code from "./modules/code.js";
-import list_ordered from "./modules/list_ordered.js";
+import list_ordered from "./modules/list_ordered.vue";
 import list_unordered from "./modules/list_unordered.js";
 
 import image from "./modules/image.vue";
@@ -69,18 +71,19 @@ export default {
   },
 
 
-  components: { Btn },
+  components: {Btn},
 
   data() {
     return {
       selection: "",
-      selectedNode: null
+      selectedNode: null,
+      selectionOptions: {node: null, textAlign: false}
     }
   },
 
   computed: {
     mergedOptions() {
-      return { ...bus.options, ...this.options }
+      return {...bus.options, ...this.options}
     },
 
     modules() {
@@ -89,7 +92,7 @@ export default {
       return modules
         .filter(
           m => this.mergedOptions.hideModules === undefined ||
-          !this.mergedOptions.hideModules[m.title]
+            !this.mergedOptions.hideModules[m.title]
         )
         .map(mod => {
           if (customIcons !== undefined && customIcons[mod.title] !== undefined) {
@@ -120,6 +123,17 @@ export default {
   },
 
   methods: {
+    getSelectionOptions() {
+      const select = window.getSelection()
+      const parent = select.getRangeAt(0).commonAncestorContainer.parentElement
+      this.selectionOptions = {
+        node: parent.nodeName,
+        textAlign: parent.style.textAlign || false
+      }
+    },
+    updateSelectionOptions(obj) {
+      this.selectionOptions = obj
+    },
     saveSelection() {
       if (window.getSelection !== undefined) {
         this.selection = window.getSelection();
@@ -176,11 +190,11 @@ export default {
       this.$emit("change", this.$refs.content.innerHTML);
     },
 
-    onInput: debounce(function() {
+    onInput: debounce(function () {
       this.emit();
     }, 300),
 
-    onKeyDown: debounce(function() {
+    onKeyDown: debounce(function () {
       if (navigator.userAgent.indexOf('MSIE') > 0 || navigator.userAgent.match(/Trident.*rv:11\./)) {
         setTimeout(() => {
           this.emit();
@@ -214,7 +228,7 @@ export default {
   },
 
   mounted() {
-    this.unwatch = this.$watch("html", this.syncHTML, { immediate: true });
+    this.unwatch = this.$watch("html", this.syncHTML, {immediate: true});
 
     document.addEventListener("click", this.onDocumentClick);
 
@@ -223,7 +237,7 @@ export default {
     this.$refs.content.addEventListener("keydown", this.onKeyDown);
     this.$refs.content.addEventListener("cut", this.onKeyDown);
     this.$refs.content.addEventListener("paste", this.onKeyDown);
-    this.$refs.content.addEventListener("blur", this.onContentBlur, { capture: true });
+    this.$refs.content.addEventListener("blur", this.onContentBlur, {capture: true});
 
     if (this.mergedOptions.forcePlainTextOnPaste === true) {
       this.$refs.content.addEventListener("paste", this.onPaste);
@@ -254,126 +268,129 @@ $buttonHeight = 42px
 $svgSize = 16px
 
 .editr
-    border 1px solid darken($offwhite, 7.5%)
-    width 100%
-    position relative
+  border 1px solid darken($offwhite, 7.5%)
+  width 100%
+  position relative
 
-    .editr--toolbar
-        &.bottom
-            ~.editr--content
-                padding-bottom 50px
+  .editr--toolbar
+    &.bottom
+      ~ .editr--content
+        padding-bottom 50px
 
 .editr--toolbar
-    background $offwhite
-    border-bottom 1px solid darken($offwhite, 7.5%)
-    position relative
-    display flex
+  background $offwhite
+  border-bottom 1px solid darken($offwhite, 7.5%)
+  position relative
+  display flex
+  height $buttonHeight
+
+  &.bottom
+    position absolute
+    width 100%
+    bottom 0
+    border-bottom 0
+    border-top 1px solid #e4e4e4
+
+  a
+    display inline-block
+    width $buttonWidth
+    max-width $buttonHeight
     height $buttonHeight
+    color #333
+    fill #333
+    cursor pointer
+    text-align center
+    line-height 1
 
-    &.bottom
+    &:hover
+      background alpha(black, 0.1)
+
+    &:active
+      background alpha(black, 0.2)
+
+    svg
+      width $svgSize
+      height $svgSize
+      margin (($buttonHeight - $svgSize) / 2) auto
+
+      path
+        fill inherit
+
+    &.vw-btn-separator
+      width 1px
+      margin 0 8px
+
+      &:hover
+        background initial
+        cursor default
+
+      i.vw-separator
+        border-left 1px solid alpha(black, 0.1)
+        height 100%
         position absolute
-        width 100%
-        bottom 0
-        border-bottom 0
-        border-top 1px solid #e4e4e4
-    a
-        display inline-block
-        width $buttonWidth
-        max-width $buttonHeight
-        height $buttonHeight
-        color #333
-        fill #333
-        cursor pointer
-        text-align center
-        line-height 1
+        width 1px
 
-        &:hover
-            background alpha(black, 0.1)
+  .dashboard
+    width 100%
+    position absolute
+    top 32px
+    left 0
+    text-align left
+    padding 5px
+    background alpha(white, 0.95)
+    border 1px solid $offwhite
+    box-sizing border-box
+    z-index 16
 
-        &:active
-            background alpha(black, 0.2)
-
-        svg
-            width $svgSize
-            height $svgSize
-            margin (($buttonHeight - $svgSize)/2) auto
-
-            path
-                fill inherit
-
-        &.vw-btn-separator
-            width 1px
-            margin 0 8px
-
-            &:hover
-                background initial
-                cursor default
-
-            i.vw-separator
-                border-left 1px solid alpha(black, 0.1)
-                height 100%
-                position absolute
-                width 1px
+  &.bottom
 
     .dashboard
-        width 100%
-        position absolute
-        top 32px
-        left 0
-        text-align left
-        padding 5px
-        background alpha(white, 0.95)
-        border 1px solid $offwhite
-        box-sizing border-box
-        z-index 16
-
-    &.bottom
-
-        .dashboard
-            top unset
-            bottom 100%
+      top unset
+      bottom 100%
 
 
 .editr--content
-    min-height 150px
-    padding 12px 8px 16px 8px
-    line-height 1.33
-    font-family inherit
-    color inherit
-    overflow-y auto
+  min-height 150px
+  padding 12px 8px 16px 8px
+  line-height 1.33
+  font-family inherit
+  color inherit
+  overflow-y auto
 
-    &[contenteditable=true]:empty:before
-        content: attr(placeholder);
-        color alpha(black, 0.3)
-        display: block; /* For Firefox */
+  &[contenteditable=true]:empty:before
+    content: attr(placeholder);
+    color alpha(black, 0.3)
+    display: block;
 
-    img
-        max-width 100%
+  /* For Firefox */
 
-    table
-        width 100%
-        border-collapse collapse
+  img
+    max-width 100%
 
-        th
-            text-align left
+  table
+    width 100%
+    border-collapse collapse
 
-        th, td
-            border 1px solid #dddddd
-            padding 2px
+    th
+      text-align left
+
+    th, td
+      border 1px solid #dddddd
+      padding 2px
 
 
-    &:focus
-        outline 0
+  &:focus
+    outline 0
 
-    ul, ol
-        li
-            list-style-position: inside;
+  ul, ol
+    li
+      list-style-position: inside;
 
 @media screen and (max-width 320px)
-    .editr--toolbar
-        a
-            margin 0 2px
+  .editr--toolbar
+    a
+      margin 0 2px
 
-        a.vw-btn-separator
-            display none
+    a.vw-btn-separator
+      display none
 </style>

@@ -1,6 +1,6 @@
 <template lang="pug">
 div(@mousedown="onBtnClick")
-	a(:class="'vw-btn-'+module.title", v-html="module.icon")
+	a(:class="['vw-btn-'+module.title, {'active': isActive()}]", v-html="module.icon")
 
 	.dashboard(
 		v-show="showDashboard",
@@ -21,7 +21,7 @@ div(@mousedown="onBtnClick")
 import bus from 'src/editor/bus.js';
 
 export default {
-  props: ["module", "options"],
+  props: ["module", "options", "selectionOptions"],
 
   data() {
     return {
@@ -36,6 +36,19 @@ export default {
   },
 
   methods: {
+    isActive() {
+      console.log(this.module.title)
+      if (this.module.title === 'link' && this.selectionOptions.node === 'A') return true
+      if (this.module.title === 'headings' && (this.selectionOptions.node && this.selectionOptions.node[0] === 'H')) return true
+      if (this.module.title === 'italic' && this.selectionOptions.node === 'I') return true
+      if (this.module.title === 'bold' && this.selectionOptions.node === 'B') return true
+      if (this.module.title === 'underline' && this.selectionOptions.node === 'U') return true
+      if (this.module.title === 'justifyLeft' && this.selectionOptions.textAlign === 'left') return true
+      if (this.module.title === 'justifyCenter' && this.selectionOptions.textAlign === 'center') return true
+      if (this.module.title === 'justifyRight' && this.selectionOptions.textAlign === 'right') return true
+      return false
+    },
+
     closeDashboard() {
       this.showDashboard = false;
     },
@@ -47,6 +60,7 @@ export default {
     exec() {
       console.log(arguments);
       this.$parent.exec.apply(null, arguments)
+      this.$emit('updateOptions', {node: bus.selectedNode.nodeName, textAlign: bus.selectedNode.style.textAlign || false})
     },
 
     onBtnClick($event) {
@@ -79,4 +93,10 @@ export default {
 
 </script>
 
+
+<style>
+.active {
+  background: rgba(0,0,0,0.2);
+}
+</style>
 
