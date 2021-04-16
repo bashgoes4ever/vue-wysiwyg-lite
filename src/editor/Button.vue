@@ -37,7 +37,6 @@ export default {
 
   methods: {
     isActive() {
-      console.log(this.module.title)
       if (this.module.title === 'link' && this.selectionOptions.node === 'A') return true
       if (this.module.title === 'headings' && (this.selectionOptions.node && this.selectionOptions.node[0] === 'H')) return true
       if (this.module.title === 'italic' && this.selectionOptions.node === 'I') return true

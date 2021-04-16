@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="465b6018-50f2-4df7-817e-81b22e5316be" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/editor/modules/list_ordered.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/vueWysiwyg.css" beforeDir="false" afterPath="$PROJECT_DIR$/dist/vueWysiwyg.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/vueWysiwyg.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/vueWysiwyg.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/editor/Button.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/editor/Button.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/editor/Editr.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/editor/Editr.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/editor/modules/hyperlink.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/editor/modules/hyperlink.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +57,7 @@
       <workItem from="1613992708619" duration="3519000" />
       <workItem from="1618560940013" duration="304000" />
       <workItem from="1618561256738" duration="126000" />
-      <workItem from="1618561393574" duration="4542000" />
+      <workItem from="1618561393574" duration="4863000" />
     </task>
     <servers />
   </component>
